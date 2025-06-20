@@ -1,0 +1,21 @@
+<div class="forecast-container">
+  <div *ngFor="let f of forecasts" class="forecast-card">
+    <div class="date">{{ formatDate(f.date_text) }}</div>
+
+    <img
+      [src]="'https://openweathermap.org/img/wn/' + f.weather.icon + '@2x.png'"
+      [alt]="f.weather.description"
+      class="weather-icon"
+    />
+
+    <div class="temp">{{ f.temp }}°C (feels like {{ f.feels_like }}°C)</div>
+
+    <div class="description">{{ f.weather.description }}</div>
+
+    <div class="details">
+      Humidity: {{ f.humidity }}% | Wind: {{ f.wind_speed }} m/s | Visibility:
+      {{ f.visibility }} m | Precipitation Probability: {{ (f.pop * 100) |
+      number:'1.0-0' }}%
+    </div>
+  </div>
+</div>
