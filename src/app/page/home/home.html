@@ -3,42 +3,38 @@
     <div>
       <h1>
         Welcome,
-        <span *ngIf="user$ | async as user"
-          >{{ user.name || user.nickname }}</span
-        >!
+        <span *ngIf="user$ | async as user">
+          {{ user.name || user.nickname }}!
+          <a
+            *ngIf="user.nickname"
+            [href]="'https://github.com/' + user.nickname"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub Profile
+          </a>
+        </span>
       </h1>
-    </div>
-    <div>
-      <a
-        href="https://github.com/yourgithub"
-        target="_blank"
-        rel="noopener"
-        class="btn btn-outline-secondary"
-      >
-        GitHub
-      </a>
     </div>
   </div>
 
-  <form
-    (ngSubmit)="searchCity()"
-    class="input-group mb-3"
-    style="max-width: 400px"
-  >
+  <div class="my-3">
     <input
       type="text"
       class="form-control"
-      placeholder="Enter city"
+      placeholder="Enter your city"
       [(ngModel)]="city"
       name="city"
-      required
     />
-    <button class="btn btn-primary" type="submit" [disabled]="!city.trim()">
-      Search
-    </button>
-  </form>
+    <div class="d-flex gap-2 mt-2">
+      <button class="btn btn-primary" (click)="searchWeather()">
+        Check Weather
+      </button>
+      <button class="btn btn-secondary" (click)="clearInput()">Clear</button>
+    </div>
+  </div>
 
-  <div *ngIf="searchedCity" class="mt-4">
-    <h5>Showing forecast for: {{ searchedCity }}</h5>
+  <div *ngIf="forecast" class="mt-4">
+    <app-forecast [forecasts]="forecastData"></app-forecast>
   </div>
 </div>

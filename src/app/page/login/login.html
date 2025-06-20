@@ -1,19 +1,22 @@
-<div class="text-center mt-5">
-  <h1>Welcome to the Weather Forecast App</h1>
-  <p *ngIf="!loading">
-    Please log in to view weather information for your city.
-  </p>
+<div class="login-page d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow p-4 text-center login-card">
+    <h1 class="mb-3 text-primary">🌤️ Weather Forecast App</h1>
 
-  <div *ngIf="loading">
-    <div class="spinner-border text-primary" role="status"></div>
-    <p class="mt-2">Checking authentication...</p>
+    <p *ngIf="!loading" class="text-muted">
+      Please log in with your GitHub account to check the weather in your city.
+    </p>
+
+    <div *ngIf="loading">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Checking authentication...</p>
+    </div>
+
+    <button
+      *ngIf="!loading && !isAuthenticated"
+      class="btn btn-outline-primary mt-3"
+      (click)="login()"
+    >
+      🔐 Log in
+    </button>
   </div>
-
-  <button
-    *ngIf="!loading && !isAuthenticated"
-    class="btn btn-primary"
-    (click)="login()"
-  >
-    Log in with GitHub
-  </button>
 </div>
