@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared/shared.module';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,17 @@ import { SHARED_IMPORTS } from '../../shared/shared.module';
   styleUrl: './home.scss'
 })
 export class Home {
+  user$;
   user = '';
   city = '';
   searchedCity = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private auth: AuthService
+  ) {
+    this.user$ = this.auth.user$;
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

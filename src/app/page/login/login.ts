@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SHARED_IMPORTS } from '../../shared/shared.module';
+import { AuthService } from '@auth0/auth0-angular';
 
 
 @Component({
@@ -10,15 +11,25 @@ import { SHARED_IMPORTS } from '../../shared/shared.module';
   styleUrl: './login.scss'
 })
 export class Login {
-  username = '';
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private router: Router) { }
+  loading = true;
+  isAuthenticated = false;
+  constructor() {
+    this.auth.isAuthenticated$.subscribe((isAuth) => {
+      this.isAuthenticated = isAuth;
+      this.loading = false;
+
+      if (isAuth) {
+        this.router.navigate(['/home']);
+      }
+    });
+  }
 
   login() {
-    this.router.navigate(['/home'], { queryParams: { user: this.username } });
-    // if (this.username.trim()) {
-    //   // For now, no auth service - just redirect with username param
-    //   this.router.navigate(['/home'], { queryParams: { user: this.username } });
-    // }
+    this.auth.loginWithRedirect({
+      appState: { target: '/home' }
+    });
   }
 }

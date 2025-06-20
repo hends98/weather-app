@@ -1,16 +1,30 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
     <div>
-      <h4>Welcome, {{ user }}!</h4>
+      <h1>
+        Welcome,
+        <span *ngIf="user$ | async as user"
+          >{{ user.name || user.nickname }}</span
+        >!
+      </h1>
     </div>
     <div>
-      <a href="https://github.com/yourgithub" target="_blank" rel="noopener" class="btn btn-outline-secondary">
+      <a
+        href="https://github.com/yourgithub"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-outline-secondary"
+      >
         GitHub
       </a>
     </div>
   </div>
 
-  <form (ngSubmit)="searchCity()" class="input-group mb-3" style="max-width: 400px;">
+  <form
+    (ngSubmit)="searchCity()"
+    class="input-group mb-3"
+    style="max-width: 400px"
+  >
     <input
       type="text"
       class="form-control"
@@ -19,15 +33,12 @@
       name="city"
       required
     />
-    <button class="btn btn-primary" type="submit" [disabled]="!city.trim()">Search</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!city.trim()">
+      Search
+    </button>
   </form>
-  
+
   <div *ngIf="searchedCity" class="mt-4">
     <h5>Showing forecast for: {{ searchedCity }}</h5>
-    <!-- Weather forecast results can go here -->
   </div>
 </div>
-
- <footer class="text-center mt-4 mb-3 text-muted">
-      &copy; 2025 WeatherApp. All rights reserved.
-    </footer>

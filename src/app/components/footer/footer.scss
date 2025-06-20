@@ -1,4 +1,9 @@
 footer {
-    height: 40px;
-    line-height: 40px;
+  width: 100%;
+  text-align: center;
+
+  @media (max-width: 576px) {
+    font-size: 0.8rem;
+    text-align: center;
+  }
 }

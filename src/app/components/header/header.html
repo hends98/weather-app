@@ -1,6 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top px-3">
-    <a class="navbar-brand" href="#">WeatherApp</a>
-    <div class="ms-auto">
-    <a href="https://github.com/your-repo" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+<nav class="navbar navbar-expand-lg px-3">
+  <div
+    class="container-fluid d-flex justify-content-between align-items-center flex-wrap"
+  >
+    <a class="navbar-brand fs-4 mb-2 mb-lg-0 text-white" href="#"
+      >Weather App</a
+    >
+
+    <div
+      *ngIf="auth.user$ | async as user"
+      class="d-flex align-items-center flex-wrap gap-2"
+    >
+      <button class="btn btn-outline-light btn-sm fs-6" (click)="logout()">
+        Logout
+      </button>
     </div>
+  </div>
 </nav>

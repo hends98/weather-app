@@ -1,3 +1,19 @@
-nav.navbar {
-    height: 56px;
+.navbar {
+  background: linear-gradient(90deg, #1e3c72, #2a5298);
+  min-height: 56px;
+  color: white;
+
+  .navbar-brand {
+    font-weight: 600;
+  }
+
+  button.btn-outline-light {
+    border-color: #f0f0f0;
+    color: #f0f0f0;
+
+    &:hover {
+      background-color: #f0f0f0;
+      color: #1e3c72;
+    }
+  }
 }
